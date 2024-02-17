@@ -161,7 +161,6 @@
         <v-col cols="6">
           <v-text-field
             label="Age"
-            :readonly="disabled"
             v-model="payload.age"
             dense
             class="text-center"
@@ -174,7 +173,6 @@
           <v-autocomplete
             label="Member Type"
             outlined
-            :readonly="disabled"
             v-model="payload.member_type"
             :items="member_types"
             dense
@@ -213,7 +211,6 @@
           <v-autocomplete
             label="Term"
             outlined
-            :readonly="disabled"
             v-model="payload.term"
             :items="[`Long Term`, `Short Term`]"
             dense
@@ -448,6 +445,9 @@
         </v-col>
       </v-row>
     </v-container>
+
+    <!-- <Form /> -->
+
     <!-- <v-footer :absolute="true" style="background: none">
       <v-container>
         <v-row>
@@ -500,7 +500,7 @@ export default {
     date_of_birth: false,
     floor_number: "",
     room_number: "",
-
+    
     payload: {
       company_id: 1,
       member_type: "Primary",
@@ -521,7 +521,7 @@ export default {
       nationality: "3333",
       address: "Modi voluptates odio",
       term: "Long Term",
-      date_of_birth : "2024-02-16",
+      date_of_birth: "2024-02-16",
       start_date: "2024-02-16",
       end_date: "2024-02-16",
     },
@@ -541,6 +541,7 @@ export default {
     upload: {
       name: "",
     },
+    fields: [],
   }),
   mounted() {},
   async created() {
@@ -568,6 +569,7 @@ export default {
   },
 
   methods: {
+   
     async getRelatedChildDetails() {
       await this.setRoomSubCategories(this.payload.room_category_id);
     },
