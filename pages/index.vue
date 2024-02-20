@@ -1,6 +1,9 @@
 <template>
   <v-app>
     <div class="text-center">
+      <!-- <v-snackbar v-model="dialog" color="primary">
+        {{ message }}
+      </v-snackbar> -->
       <v-dialog v-model="dialog" width="300">
         <v-card style="background: none">
           <v-toolbar style="background: none" flat dense>
@@ -19,38 +22,12 @@
               ></v-img>
             </p>
             <!-- <p class="text-center">
-                      {{ message }}
-                    </p> -->
+              {{ message }}
+            </p> -->
           </v-card-text>
         </v-card>
       </v-dialog>
     </div>
-    <template>
-      <div class="text-center">
-        <v-dialog v-model="tanentTypeDialog" width="500">
-          <v-card>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-
-              <v-icon color="black" @click="tanentTypeDialog = false">
-                mdi-close-circle
-              </v-icon>
-            </v-card-actions>
-
-            <v-card-text>
-              <v-text-field
-                v-model="tanent_number"
-                outlined
-                hide-details
-                dense
-                label="Tanent Reference Id"
-              ></v-text-field>
-              <v-btn class="mt-1" color="primary" block> Search </v-btn>
-            </v-card-text>
-          </v-card>
-        </v-dialog>
-      </div>
-    </template>
     <v-app-bar color="primary" fixed app>
       <v-row>
         <v-col cols="4">
@@ -487,9 +464,8 @@ export default {
   data: () => ({
     tanent_number: "",
     tanentTypeDialog: false,
-    backendUrl: "http://localhost:8000/api",
-    // backendUrl: `https://backend.mytime2cloud.com/api`,
-    response_image: "/sucess.png",
+    response_image: "/success.png",
+    message: "Record has been inserted",
 
     menu: false,
     menu2: false,
@@ -500,9 +476,9 @@ export default {
     date_of_birth: false,
     floor_number: "",
     room_number: "",
-    
+
     payload: {
-      company_id: 1,
+      company_id: 2,
       member_type: "Primary",
       room_category_id: 1,
       room_sub_category_id: 2,
@@ -549,19 +525,17 @@ export default {
       params: { company_id: this.payload.company_id },
     };
     let { data: room_categories } = await this.$axios.get(
-      this.backendUrl + `/room-category-list`,
+      `/room-category-list`,
       config
     );
     this.room_categories = room_categories;
 
     let { data: room_sub_categories } = await this.$axios.get(
-      this.backendUrl + `/room-sub-category-list`,
+      `/room-sub-category-list`,
       config
     );
 
-    let { data: member_types } = await this.$axios.get(
-      this.backendUrl + `/get_member_types`
-    );
+    let { data: member_types } = await this.$axios.get(`/get_member_types`);
     this.member_types = member_types;
     this.room_sub_categories = room_sub_categories;
 
@@ -569,7 +543,6 @@ export default {
   },
 
   methods: {
-   
     async getRelatedChildDetails() {
       await this.setRoomSubCategories(this.payload.room_category_id);
     },
@@ -581,24 +554,19 @@ export default {
       await this.getFloorByCategory(id);
     },
     async getFloorByCategory(id) {
-      let { data } = await this.$axios.get(
-        this.backendUrl + `/room-floor-by-category/${id}`
-      );
+      let { data } = await this.$axios.get(`/room-floor-by-category/${id}`);
       this.floors = data;
 
       this.getRoomsByFloorId();
     },
     async getRoomsByFloorId() {
-      let { data } = await this.$axios.get(
-        this.backendUrl + `/room-by-floor-id`,
-        {
-          params: {
-            company_id: this.payload.company_id,
-            floor_id: this.payload.floor_id,
-            room_category_id: this.payload.room_category_id,
-          },
-        }
-      );
+      let { data } = await this.$axios.get(`/room-by-floor-id`, {
+        params: {
+          company_id: this.payload.company_id,
+          floor_id: this.payload.floor_id,
+          room_category_id: this.payload.room_category_id,
+        },
+      });
       this.rooms = data;
     },
 
@@ -606,17 +574,14 @@ export default {
       let { room_number } = this.rooms.find((e) => e.id == room_id);
       this.payload.room_number = room_number || 0;
     },
-    close() {
-      this.dialog = false;
-      this.errors = [];
-      setTimeout(() => {}, 300);
-    },
     reset() {
       this.$refs.CameraComponent.isClicked = false;
       this.errors = [];
       let company_id = this.payload.company_id;
       this.payload = {};
       this.payload.company_id = company_id;
+
+      setTimeout(() => (this.dialog = false), 3000);
     },
     submit() {
       let formData = new FormData();
@@ -626,9 +591,11 @@ export default {
       }
 
       this.$axios
-        .post(`${this.backendUrl}/tanent-register`, formData)
+        .post(`tanent-register`, formData)
         .then(({ data }) => {
-          alert("Tanent has been registered");
+          // alert("Tanent has been registered");
+          this.dialog = true;
+          this.message = "Record has been inserted";
           this.reset();
         })
         .catch(({ response }) => {
@@ -653,8 +620,8 @@ export default {
 };
 </script>
 
-<!-- <style>
+<style>
 .v-dialog.v-dialog--active {
   box-shadow: none !important;
 }
-</style> -->
+</style>
