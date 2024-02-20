@@ -66,7 +66,7 @@
           </div>
         </v-col>
 
-        <v-col cols="6">
+        <v-col cols="4">
           <v-autocomplete
             @change="getRelatedChildDetails"
             label="Room Category"
@@ -85,7 +85,7 @@
           >
           </v-autocomplete>
         </v-col>
-        <v-col cols="6">
+        <!-- <v-col cols="6">
           <v-autocomplete
             label="Room Sub Category"
             outlined
@@ -102,8 +102,8 @@
             "
           >
           </v-autocomplete>
-        </v-col>
-        <v-col cols="6">
+        </v-col> -->
+        <v-col cols="4">
           <v-autocomplete
             @change="getRoomsByFloorId"
             label="Floor Number"
@@ -120,7 +120,7 @@
           >
           </v-autocomplete>
         </v-col>
-        <v-col cols="6">
+        <v-col cols="4">
           <v-autocomplete
             @change="getRoomNumber(payload.room_id)"
             label="Room"
@@ -132,31 +132,6 @@
             item-value="id"
             :hide-details="!errors.room_id"
             :error-messages="errors && errors.room_id ? errors.room_id[0] : ''"
-          >
-          </v-autocomplete>
-        </v-col>
-        <v-col cols="6">
-          <v-text-field
-            label="Age"
-            v-model="payload.age"
-            dense
-            class="text-center"
-            outlined
-            :hide-details="!errors.age"
-            :error-messages="errors && errors.age ? errors.age[0] : ''"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="6">
-          <v-autocomplete
-            label="Member Type"
-            outlined
-            v-model="payload.member_type"
-            :items="member_types"
-            dense
-            :hide-details="!errors.member_type"
-            :error-messages="
-              errors && errors.member_type ? errors.member_type[0] : ''
-            "
           >
           </v-autocomplete>
         </v-col>
@@ -183,6 +158,57 @@
             "
             label="Last Name *"
           ></v-text-field>
+        </v-col>
+        <v-col cols="6">
+          <v-text-field
+            label="Phone Number"
+            v-model="payload.phone_number"
+            dense
+            class="text-center"
+            outlined
+            :hide-details="!errors.phone_number"
+            :error-messages="
+              errors && errors.phone_number ? errors.phone_number[0] : ''
+            "
+          ></v-text-field>
+        </v-col>
+        <v-col cols="6">
+          <v-text-field
+            label="Whatsapp Number (optional)"
+            v-model="payload.whatsapp_number"
+            dense
+            class="text-center"
+            outlined
+            :hide-details="!errors.whatsapp_number"
+            :error-messages="
+              errors && errors.whatsapp_number ? errors.whatsapp_number[0] : ''
+            "
+          ></v-text-field>
+        </v-col>
+        <v-col cols="6">
+          <v-text-field
+            label="Age"
+            v-model="payload.age"
+            dense
+            class="text-center"
+            outlined
+            :hide-details="!errors.age"
+            :error-messages="errors && errors.age ? errors.age[0] : ''"
+          ></v-text-field>
+        </v-col>
+        <v-col cols="6">
+          <v-autocomplete
+            label="Member Type"
+            outlined
+            v-model="payload.member_type"
+            :items="member_types"
+            dense
+            :hide-details="!errors.member_type"
+            :error-messages="
+              errors && errors.member_type ? errors.member_type[0] : ''
+            "
+          >
+          </v-autocomplete>
         </v-col>
         <v-col cols="6">
           <v-autocomplete
@@ -253,32 +279,7 @@
             ></v-date-picker>
           </v-menu>
         </v-col>
-        <v-col cols="6">
-          <v-text-field
-            label="Phone Number"
-            v-model="payload.phone_number"
-            dense
-            class="text-center"
-            outlined
-            :hide-details="!errors.phone_number"
-            :error-messages="
-              errors && errors.phone_number ? errors.phone_number[0] : ''
-            "
-          ></v-text-field>
-        </v-col>
-        <v-col cols="6">
-          <v-text-field
-            label="Whatsapp Number (optional)"
-            v-model="payload.whatsapp_number"
-            dense
-            class="text-center"
-            outlined
-            :hide-details="!errors.whatsapp_number"
-            :error-messages="
-              errors && errors.whatsapp_number ? errors.whatsapp_number[0] : ''
-            "
-          ></v-text-field>
-        </v-col>
+
         <v-col cols="6">
           <v-text-field
             label="RFID"
@@ -325,7 +326,7 @@
             :error-messages="errors && errors.address ? errors.address[0] : ''"
           ></v-text-field>
         </v-col>
-        <v-col cols="6">
+        <!-- <v-col cols="6">
           <v-menu
             v-model="menu"
             :close-on-content-click="false"
@@ -390,7 +391,7 @@
               scrollable
             ></v-date-picker>
           </v-menu>
-        </v-col>
+        </v-col> -->
         <v-col cols="12">
           <v-row>
             <v-col cols="6">
@@ -481,25 +482,25 @@ export default {
       company_id: 2,
       member_type: "Primary",
       room_category_id: 1,
-      room_sub_category_id: 2,
-      floor_id: 1,
-      room_id: 4,
-      room_number: "101",
-      age: "Incidunt officia fu",
-      gender: "Male",
-      first_name: "Rebekah",
-      last_name: "Fleming",
-      email: "coviha@mailinator.com",
-      phone_number: "+1 (945) 447-5911",
-      whatsapp_number: "31",
-      rfid: "2222",
-      pin: "Reiciendis do vel qu",
-      nationality: "3333",
-      address: "Modi voluptates odio",
       term: "Long Term",
-      date_of_birth: "2024-02-16",
-      start_date: "2024-02-16",
-      end_date: "2024-02-16",
+      room_sub_category_id: 633,
+      floor_id: 0,
+      room_id: 0,
+      room_number: null,
+      age: null,
+      gender: null,
+      first_name: null,
+      last_name: null,
+      email: null,
+      phone_number: null,
+      whatsapp_number: null,
+      rfid: null,
+      pin: null,
+      nationality: null,
+      address: null,
+      date_of_birth: null,
+      start_date: null,
+      end_date: null,
     },
     floors: [],
     rooms: [],
@@ -528,7 +529,10 @@ export default {
       `/room-category-list`,
       config
     );
-    this.room_categories = room_categories;
+    this.room_categories = room_categories.map((e) => ({
+      ...e,
+      name: e.name.charAt(0).toUpperCase() + e.name.slice(1),
+    }));
 
     let { data: room_sub_categories } = await this.$axios.get(
       `/room-sub-category-list`,
@@ -555,7 +559,10 @@ export default {
     },
     async getFloorByCategory(id) {
       let { data } = await this.$axios.get(`/room-floor-by-category/${id}`);
-      this.floors = data;
+      this.floors = data.map((e) => ({
+        id: e.id,
+        floor_number: e.floor_number.split(" ")[0],
+      }));
 
       this.getRoomsByFloorId();
     },
