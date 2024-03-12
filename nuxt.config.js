@@ -6,8 +6,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: 'Mytime 2 Cloud',
-    title: 'Mytime 2 Cloud',
+    titleTemplate: 'MyHome2Cloud',
+    title: 'MyHome2Cloud',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
